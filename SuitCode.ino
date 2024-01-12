@@ -42,7 +42,7 @@ void setup() {
   helmet1.attach(9);   //Right
   helmet2.attach(10);  //Left
   helmet1.write(180);   //Right Open
-  helmet2.write(0);    //Left Open
+  helmet2.write(35);    //Left Open
   for (int i = 0; i < LED_COUNT; i++) {
     pinMode(ledPins[i], OUTPUT);  // Set all LED pins as output
   }
@@ -62,9 +62,9 @@ void loop() {
     if (irRawdata != last_irData) {
       switch (IrReceiver.decodedIRData.command) {
         case 70:  // VOL+ button pressed Helmet Closes
-            for (int i = 0; i < 120; i += 1) {// Helmet Close
-              angle1 = 120 - i;
-              angle2 = 0 + i;
+            for (int i = 0; i < 100; i += 1) {// Helmet Close
+              angle1 = 180 - i*1.75;
+              angle2 = 35 + i;
               helmet1.write(angle1);
               helmet2.write(angle2);
               delay(10);
@@ -143,11 +143,12 @@ void loop() {
                 }
               }
             }
-            for (int i = 0; i < 120; i += 1) {// Helmet Open
-              angle1 = 60 + i;
-              angle2 = 120 - i;
+            for (int i = 0; i < 100; i += 1) {// Helmet Open
+              angle1 = 5 + i*1.75;
+              angle2 = 135 - i;
               helmet1.write(angle1);
               helmet2.write(angle2);
+              delay(10);
             }
             break;
           }
